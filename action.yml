@@ -7,7 +7,7 @@ branding:
 
 inputs:
   token:
-    description: Token used to post the comment, usually ${{ secrets.GITHUB_TOKEN }}
+    description: Token used to post the comment, normally the GITHUB_TOKEN secret
     required: true
   paths:
     description: Source paths to scan for layout issues
