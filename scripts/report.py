@@ -51,7 +51,7 @@ def _rtl_dimension(rtl: Optional[dict]) -> dict:
         "key": "rtl",
         "available": True,
         "score": score,
-        "detail": "%d of %d files have physical layout code" % (affected, files),
+        "detail": "physical layout code in %d of %d files" % (affected, files),
         "affected": affected,
         "files": files,
         "issues": issues,
