@@ -1,0 +1,19 @@
+name: Arabic readiness
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hfip/arabic-readiness@v1
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: tests/fixtures/project
