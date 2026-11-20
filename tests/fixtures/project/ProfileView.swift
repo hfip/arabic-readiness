@@ -5,7 +5,7 @@ final class ProfileView: UIView {
     private let followButton = UIButton(type: .system)
 
     func setup() {
-        titleLabel.textAlignment = .left
+        titleLabel.textAlignment = .leading
         followButton.contentHorizontalAlignment = .right
         titleLabel.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
         semanticContentAttribute = .forceLeftToRight
