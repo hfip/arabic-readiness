@@ -1,0 +1,43 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  unit:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pytest
+      - run: pytest -q
+
+  dogfood:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+    steps:
+      - uses: actions/checkout@v4
+      - name: Run the action on the fixture project
+        id: readiness
+        uses: ./
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          paths: tests/fixtures/project
+          comment: "false"
+          min-score: "0"
+      - name: Check the output
+        run: |
+          test -f arabic-readiness.md
+          grep -q "<!-- arabic-readiness -->" arabic-readiness.md
+          test -n "${{ steps.readiness.outputs.score }}"
+          echo "score=${{ steps.readiness.outputs.score }}"
+          head -n 8 arabic-readiness.md
